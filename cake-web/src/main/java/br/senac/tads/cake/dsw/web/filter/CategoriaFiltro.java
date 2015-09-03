@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.cake.dsw.web.filtro;
+package br.senac.tads.cake.dsw.web.filter;
 
 import br.senac.tads.cake.common.entity.Categoria;
 import br.senac.tads.cake.common.service.CategoriaService;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.tads.cake.dsw.web.entidade;
+package br.senac.tads.cake.dsw.web.entity;
 
 import br.senac.tads.cake.common.entity.Produto;
 import java.io.Serializable;

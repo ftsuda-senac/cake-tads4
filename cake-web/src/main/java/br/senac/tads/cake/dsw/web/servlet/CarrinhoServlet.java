@@ -8,7 +8,7 @@ package br.senac.tads.cake.dsw.web.servlet;
 import br.senac.tads.cake.common.entity.Produto;
 import br.senac.tads.cake.common.service.ProdutoService;
 import br.senac.tads.cake.common.service.fakeimpl.ProdutoServiceFakeImpl;
-import br.senac.tads.cake.dsw.web.entidade.ProdutoCarrinho;
+import br.senac.tads.cake.dsw.web.entity.ProdutoCarrinho;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
