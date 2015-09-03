@@ -60,9 +60,9 @@ public class ProdutoServiceFakeImpl implements ProdutoService {
             Arrays.asList(categorias.obter(1L), categorias.obter(4L)),
             new BigDecimal(105));
     MAPA_PRODUTOS.put(produto.getId(), produto);
-    produto = new Produto(4L, "Abacaxi com coco",
+    produto = new Produto(5L, "Abacaxi com coco",
             DESCRICAO_PADRAO,
-            Arrays.asList(new ImagemProduto(7L, "Bla bla bla", "imagem04a.jpg"), new ImagemProduto(8L, "Xpto Xpto", "imagem04b.jpg")),
+            Arrays.asList(new ImagemProduto(9L, "Bla bla bla", "imagem04a.jpg"), new ImagemProduto(10L, "Xpto Xpto", "imagem04b.jpg")),
             Arrays.asList(categorias.obter(1L), categorias.obter(5L), categorias.obter(7L), categorias.obter(8L)),
             new BigDecimal(85));
     MAPA_PRODUTOS.put(produto.getId(), produto);
