@@ -70,7 +70,7 @@ public class ProdutoServiceFakeImpl implements ProdutoService {
 
   @Override
   public List<Produto> listar(int offset, int quantidade) {
-    return new ArrayList<>(MAPA_PRODUTOS.values());
+    return new ArrayList<Produto>(MAPA_PRODUTOS.values());
   }
 
   @Override
