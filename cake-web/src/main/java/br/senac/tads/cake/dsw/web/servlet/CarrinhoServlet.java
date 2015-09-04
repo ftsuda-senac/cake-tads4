@@ -50,14 +50,17 @@ public class CarrinhoServlet extends HttpServlet {
     Produto prod = produtoService.obter(id);
 
     ProdutoCarrinho prodCarrinho = new ProdutoCarrinho(prod, new Date());
-    List<ProdutoCarrinho> carrinho = (List<ProdutoCarrinho>) sessao.getAttribute("carrinho");
+    List<ProdutoCarrinho> carrinho = 
+            (List<ProdutoCarrinho>) sessao.getAttribute("carrinho");
     if (carrinho == null) {
       carrinho = new ArrayList<ProdutoCarrinho>();
       sessao.setAttribute("carrinho", carrinho);
     }
     carrinho.add(prodCarrinho);
 
-    response.sendRedirect("ListaServlet");
+    //response.sendRedirect("ListaServlet");
+    RequestDispatcher dispatcher = request.getRequestDispatcher("/ListaServlet");
+    dispatcher.forward(request, response);
 
   }
 }

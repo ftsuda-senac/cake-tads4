@@ -30,7 +30,7 @@
       <div>
         <div id="categorias">
           <h4>Categorias</h4>
-          <c:forEach items="${listaCategorias}" var="categoria">
+          <c:forEach items="${applicationScope.listaCategorias}" var="categoria">
             <p><a href="#"><c:out value="${categoria.nome}" /></a></p>
             </c:forEach>
             <c:if test="${empty listaCategorias}">
