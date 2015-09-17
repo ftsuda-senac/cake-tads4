@@ -5,15 +5,15 @@
  */
 package br.senac.tads.dsw.cake.jsf2.managedbean;
 
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author fernando.tsuda
  */
-@Named(value = "carrinhoBean")
+@ManagedBean
 @SessionScoped
 public class CarrinhoBean implements Serializable {
 

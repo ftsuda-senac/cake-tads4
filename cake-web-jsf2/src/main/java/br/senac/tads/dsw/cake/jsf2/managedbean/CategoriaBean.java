@@ -9,14 +9,14 @@ import br.senac.tads.cake.common.entity.Categoria;
 import br.senac.tads.cake.common.service.CategoriaService;
 import br.senac.tads.cake.common.service.fakeimpl.CategoriaServiceFakeImpl;
 import java.util.List;
-import javax.inject.Named;
-import javax.enterprise.context.ApplicationScoped;
+import javax.faces.bean.ApplicationScoped;
+import javax.faces.bean.ManagedBean;
 
 /**
  *
  * @author fernando.tsuda
  */
-@Named(value = "categoriaBean")
+@ManagedBean
 @ApplicationScoped
 public class CategoriaBean {
 

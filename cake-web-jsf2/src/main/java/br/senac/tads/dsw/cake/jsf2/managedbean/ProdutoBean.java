@@ -8,20 +8,21 @@ package br.senac.tads.dsw.cake.jsf2.managedbean;
 import br.senac.tads.cake.common.entity.Produto;
 import br.senac.tads.cake.common.service.ProdutoService;
 import br.senac.tads.cake.common.service.fakeimpl.ProdutoServiceFakeImpl;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
-/**
- *
- * @author fernando.tsuda
- */
-@Named(value = "produtoBean")
-@SessionScoped
+@ManagedBean
+@RequestScoped
 public class ProdutoBean implements Serializable {
     
-    private List<Produto> xptomdbmad;
+    @ManagedProperty(value="#{param.id}")
+    private Long idProd;
+
+    private List<Produto> listaProdutos;
 
     /**
      * Creates a new instance of ProdutoBean
@@ -34,8 +35,34 @@ public class ProdutoBean implements Serializable {
      */
     public List<Produto> getLista() {
         ProdutoService service = new ProdutoServiceFakeImpl();
-        xptomdbmad = service.listar(0, 100);
-        return xptomdbmad;
+        setListaProdutos(service.listar(0, 100));
+        return getListaProdutos();
     }
-    
+
+    public Produto getProduto() {
+        /*
+        String id = FacesContext.getCurrentInstance()
+                .getExternalContext()
+                .getRequestParameterMap().get("id");
+                
+        Long idProd = Long.parseLong(id);*/
+        ProdutoService service = new ProdutoServiceFakeImpl();
+        return service.obter(idProd);
+    }
+
+    public List<Produto> getListaProdutos() {
+        return listaProdutos;
+    }
+
+    public void setListaProdutos(List<Produto> listaProdutos) {
+        this.listaProdutos = listaProdutos;
+    }
+
+    public Long getIdProd() {
+        return idProd;
+    }
+
+    public void setIdProd(Long idProd) {
+        this.idProd = idProd;
+    }
 }
