@@ -50,9 +50,8 @@
                                 <f:convertNumber type="currency" locale="pt-BR" />
                             </h:outputText></p>
                         <h:form>
-                            <!--
-                            Implementar lógica para adicionar produto ao carrinho
-                            -->
+                            <h:commandButton value="Adicionar no carrinho"
+                                             action="#{carrinhoBean.adicionar(produtoBean.produto.id)}" />
                         </h:form>
                         <h:outputLink value="lista.xhtml">
                             Voltar

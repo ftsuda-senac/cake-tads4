@@ -5,15 +5,19 @@
  */
 package br.senac.tads.dsw.cake.jsf2.managedbean;
 
+import br.senac.tads.cake.common.entity.Categoria;
 import br.senac.tads.cake.common.entity.Produto;
+import br.senac.tads.cake.common.service.CategoriaService;
 import br.senac.tads.cake.common.service.ProdutoService;
+import br.senac.tads.cake.common.service.fakeimpl.CategoriaServiceFakeImpl;
 import br.senac.tads.cake.common.service.fakeimpl.ProdutoServiceFakeImpl;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
 
 @ManagedBean
 @RequestScoped
@@ -21,8 +25,19 @@ public class ProdutoBean implements Serializable {
     
     @ManagedProperty(value="#{param.id}")
     private Long idProd;
+    
+    private String nome;
+    
+    private String descricao;
+    
+    private List<String> idsCategorias;
+    
+    private BigDecimal preco;
+    
 
     private List<Produto> listaProdutos;
+    
+    private Produto pTemp;
 
     /**
      * Creates a new instance of ProdutoBean
@@ -64,5 +79,59 @@ public class ProdutoBean implements Serializable {
 
     public void setIdProd(Long idProd) {
         this.idProd = idProd;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public List<String> getIdsCategorias() {
+        return idsCategorias;
+    }
+
+    public void setIdsCategorias(List<String> idsCategorias) {
+        this.idsCategorias = idsCategorias;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+    
+    public String salvar() {
+        Produto p = new Produto();
+        CategoriaService cServ = new CategoriaServiceFakeImpl();
+        
+        p.setNome(nome);
+        p.setDescricao(descricao);
+        List<Categoria> listaCategorias = new ArrayList<Categoria>();
+        for (String idCat : idsCategorias) {
+            long id = Long.parseLong(idCat);
+            listaCategorias.add(cServ.obter(id));
+        }
+        p.setCategorias(listaCategorias);
+        p.setPreco(preco);
+        pTemp = p;
+        
+        return "saida";
+    }
+    
+    public Produto getProdutoTemp() {
+        return pTemp;
     }
 }
