@@ -22,116 +22,114 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class ProdutoBean implements Serializable {
-    
-    @ManagedProperty(value="#{param.id}")
-    private Long idProd;
-    
-    private String nome;
-    
-    private String descricao;
-    
-    private List<String> idsCategorias;
-    
-    private BigDecimal preco;
-    
 
-    private List<Produto> listaProdutos;
-    
-    private Produto pTemp;
+  @ManagedProperty(value = "#{param.id}") // Permite associar um parametro passado via URL na requisicao
+  private Long idProd;
 
-    /**
-     * Creates a new instance of ProdutoBean
-     */
-    public ProdutoBean() {
-    }
+  private String nome;
 
-    /**
-     * @return the lista
-     */
-    public List<Produto> getLista() {
-        ProdutoService service = new ProdutoServiceFakeImpl();
-        setListaProdutos(service.listar(0, 100));
-        return getListaProdutos();
-    }
+  private String descricao;
 
-    public Produto getProduto() {
-        /*
-        String id = FacesContext.getCurrentInstance()
-                .getExternalContext()
-                .getRequestParameterMap().get("id");
+  private List<Long> idsCategorias;
+
+  private BigDecimal preco;
+
+  private List<Produto> listaProdutos;
+
+  private Produto pTemp;
+
+  /**
+   * Creates a new instance of ProdutoBean
+   */
+  public ProdutoBean() {
+  }
+
+  /**
+   * @return the lista
+   */
+  public List<Produto> getLista() {
+    ProdutoService service = new ProdutoServiceFakeImpl();
+    setListaProdutos(service.listar(0, 100));
+    return getListaProdutos();
+  }
+
+  public Produto getProduto() {
+    /*
+     String id = FacesContext.getCurrentInstance()
+     .getExternalContext()
+     .getRequestParameterMap().get("id");
                 
-        Long idProd = Long.parseLong(id);*/
-        ProdutoService service = new ProdutoServiceFakeImpl();
-        return service.obter(idProd);
-    }
+     Long idProd = Long.parseLong(id);*/
+    ProdutoService service = new ProdutoServiceFakeImpl();
+    return service.obter(idProd);
+  }
 
-    public List<Produto> getListaProdutos() {
-        return listaProdutos;
-    }
+  public List<Produto> getListaProdutos() {
+    return listaProdutos;
+  }
 
-    public void setListaProdutos(List<Produto> listaProdutos) {
-        this.listaProdutos = listaProdutos;
-    }
+  public void setListaProdutos(List<Produto> listaProdutos) {
+    this.listaProdutos = listaProdutos;
+  }
 
-    public Long getIdProd() {
-        return idProd;
-    }
+  public Long getIdProd() {
+    return idProd;
+  }
 
-    public void setIdProd(Long idProd) {
-        this.idProd = idProd;
-    }
+  public void setIdProd(Long idProd) {
+    this.idProd = idProd;
+  }
 
-    public String getNome() {
-        return nome;
-    }
+  public String getNome() {
+    return nome;
+  }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+  public void setNome(String nome) {
+    this.nome = nome;
+  }
 
-    public String getDescricao() {
-        return descricao;
-    }
+  public String getDescricao() {
+    return descricao;
+  }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+  public void setDescricao(String descricao) {
+    this.descricao = descricao;
+  }
 
-    public List<String> getIdsCategorias() {
-        return idsCategorias;
-    }
+  public List<Long> getIdsCategorias() {
+    return idsCategorias;
+  }
 
-    public void setIdsCategorias(List<String> idsCategorias) {
-        this.idsCategorias = idsCategorias;
-    }
+  public void setIdsCategorias(List<Long> idsCategorias) {
+    this.idsCategorias = idsCategorias;
+  }
 
-    public BigDecimal getPreco() {
-        return preco;
-    }
+  public BigDecimal getPreco() {
+    return preco;
+  }
 
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
+  public void setPreco(BigDecimal preco) {
+    this.preco = preco;
+  }
+
+  public String salvar() {
+    Produto p = new Produto();
+    CategoriaService cServ = new CategoriaServiceFakeImpl();
+
+    p.setNome(nome);
+    p.setDescricao(descricao);
+    List<Categoria> listaCategorias = new ArrayList<Categoria>();
+    for (Long idCat : idsCategorias) {
+      listaCategorias.add(cServ.obter(idCat));
     }
-    
-    public String salvar() {
-        Produto p = new Produto();
-        CategoriaService cServ = new CategoriaServiceFakeImpl();
-        
-        p.setNome(nome);
-        p.setDescricao(descricao);
-        List<Categoria> listaCategorias = new ArrayList<Categoria>();
-        for (String idCat : idsCategorias) {
-            long id = Long.parseLong(idCat);
-            listaCategorias.add(cServ.obter(id));
-        }
-        p.setCategorias(listaCategorias);
-        p.setPreco(preco);
-        pTemp = p;
-        
-        return "saida";
-    }
-    
-    public Produto getProdutoTemp() {
-        return pTemp;
-    }
+    p.setCategorias(listaCategorias);
+    p.setPreco(preco);
+    pTemp = p;
+
+    return "saida";
+  }
+
+  public Produto getProdutoTemp() {
+    return pTemp;
+  }
 }
