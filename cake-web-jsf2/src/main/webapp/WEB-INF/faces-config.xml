@@ -3,7 +3,35 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
-    <application>
-        <resource-handler>net.bootsfaces.render.UnmappedResourceHandler</resource-handler>
-    </application>
+  
+  <!-- NAO E NECESSARIO CONFIGURAR ESTE A NAVIGATION-RULE. PODE-SE USAR CONVENCOES DE NOMES -->
+  <!--
+  <navigation-rule>
+    <from-view-id>/lista.xhtml</from-view-id>
+    <navigation-case>
+      <from-action>#{produtoBean.carregarDetalhe}</from-action>
+      <from-outcome>detalhe</from-outcome>
+      <to-view-id>/detalhe.xhtml</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  -->
+  <!--
+  <application>
+    <locale-config>
+      <default-locale>en-US</default-locale>
+      <supported-locale>pt-BR</supported-locale>
+    </locale-config>
+    <resource-bundle>
+      < !- Nome do arquivo - >
+      <base-name>br.com.exemplo.mensagens.messages</base-name>
+      < !- Nome da variável usada nas telas - >
+      <var>msgs</var>
+    </resource-bundle>
+  </application>
+  -->
+  <!--
+  <lifecycle>
+    <phase-listener>br.senac.tads.dsw.veiculoweb.phaselistener.AutorizacaoListener</phase-listener>
+  </lifecycle>
+  -->
 </faces-config>
