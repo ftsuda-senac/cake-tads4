@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
   <h:head>
     <title>Facelet Title</title>
   </h:head>
@@ -17,12 +18,17 @@
           <p>
             <h:outputLabel value="Nome" />
             <h:inputText id="txtNome" value="#{produtoBean.nome}"
-                         required="true" requiredMessage="Preencher o nome" />
+                         required="true" requiredMessage="Preencher o nome" 
+                         pt:placeholder="Digite o nome do produto"/>
             <span><h:message for="txtNome" /></span>
           </p>
           <p>
             <h:outputLabel value="Descricao" />
-            <h:inputTextarea value="#{produtoBean.descricao}" />
+            <h:inputTextarea value="#{produtoBean.descricao}">
+                <f:passThroughAttribute name="placeholder" 
+                                        value="Digite a descrição do produto" />
+                
+            </h:inputTextarea>
           </p>
           <p>
             <h:outputLabel value="Categorias" />

@@ -18,6 +18,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 
 @ManagedBean
 @RequestScoped
@@ -125,11 +127,17 @@ public class ProdutoBean implements Serializable {
     p.setCategorias(listaCategorias);
     p.setPreco(preco);
     pTemp = p;
+    
+    Flash flash = FacesContext.getCurrentInstance()
+            .getExternalContext().getFlash();
+    flash.put("msg", "Produto cadastrado com sucesso");
+    flash.put("prod", pTemp);
 
-    return "saida";
+    return "lista.xhtml?faces-redirect=true";
   }
 
   public Produto getProdutoTemp() {
     return pTemp;
   }
+  
 }
