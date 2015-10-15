@@ -8,6 +8,7 @@ package br.senac.tads.dsw.cake.jsf2.managedbean;
 import br.senac.tads.cake.common.entity.Categoria;
 import br.senac.tads.cake.common.service.CategoriaService;
 import br.senac.tads.cake.common.service.fakeimpl.CategoriaServiceFakeImpl;
+import br.senac.tads.cake.common.service.jpaimpl.CategoriaServiceJPAImpl;
 import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
@@ -27,7 +28,7 @@ public class CategoriaBean {
     }
     
     public List<Categoria> getLista() {
-        CategoriaService service = new CategoriaServiceFakeImpl();
+        CategoriaService service = new CategoriaServiceJPAImpl();
         return service.listar();
     }
     

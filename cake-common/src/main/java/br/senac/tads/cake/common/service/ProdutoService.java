@@ -21,4 +21,10 @@ public interface ProdutoService {
   
   public Produto obter(Long idProduto);
   
+  public void incluir(Produto p);
+  
+  public void alterar(Produto p);
+  
+  public void remover(Long idProduto);
+  
 }

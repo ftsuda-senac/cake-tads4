@@ -89,5 +89,20 @@ public class ProdutoServiceFakeImpl implements ProdutoService {
   public Produto obter(Long idProduto) {
     return MAPA_PRODUTOS.get(idProduto);
   }
+
+    @Override
+    public void incluir(Produto p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void alterar(Produto p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void remover(Long idProduto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
   
 }

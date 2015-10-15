@@ -11,6 +11,7 @@ import br.senac.tads.cake.common.service.CategoriaService;
 import br.senac.tads.cake.common.service.ProdutoService;
 import br.senac.tads.cake.common.service.fakeimpl.CategoriaServiceFakeImpl;
 import br.senac.tads.cake.common.service.fakeimpl.ProdutoServiceFakeImpl;
+import br.senac.tads.cake.common.service.jpaimpl.ProdutoServiceJPAImpl;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class ProdutoBean implements Serializable {
    * @return the lista
    */
   public List<Produto> getLista() {
-    ProdutoService service = new ProdutoServiceFakeImpl();
+    ProdutoService service = new ProdutoServiceJPAImpl();
     setListaProdutos(service.listar(0, 100));
     return getListaProdutos();
   }
@@ -62,7 +63,7 @@ public class ProdutoBean implements Serializable {
      .getRequestParameterMap().get("id");
                 
      Long idProd = Long.parseLong(id);*/
-    ProdutoService service = new ProdutoServiceFakeImpl();
+    ProdutoService service = new ProdutoServiceJPAImpl();
     return service.obter(idProd);
   }
 

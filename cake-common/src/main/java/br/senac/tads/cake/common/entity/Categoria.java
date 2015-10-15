@@ -7,13 +7,33 @@ package br.senac.tads.cake.common.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author fernando.tsuda
  */
+@Entity
+@Table(name = "TB_CATEGORIA")
 public class Categoria implements Serializable {
-
+  
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "ID_CATEGORIA", nullable = false)
+  private Long id;
+  
+  @Column(name = "NM_CATEGORIA", nullable = false)
+  private String nome;
+  
+  @ManyToMany(mappedBy = "categorias")
+  private List<Produto> produtos;
+  
   public Categoria() {
     
   }
@@ -22,12 +42,6 @@ public class Categoria implements Serializable {
     this.id = id;
     this.nome = nome;
   }
-  
-  private Long id;
-  
-  private String nome;
-  
-  private List<Produto> produtos;
 
   public Long getId() {
     return id;
