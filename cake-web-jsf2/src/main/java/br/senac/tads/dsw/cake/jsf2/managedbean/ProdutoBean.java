@@ -11,10 +11,12 @@ import br.senac.tads.cake.common.service.CategoriaService;
 import br.senac.tads.cake.common.service.ProdutoService;
 import br.senac.tads.cake.common.service.fakeimpl.CategoriaServiceFakeImpl;
 import br.senac.tads.cake.common.service.fakeimpl.ProdutoServiceFakeImpl;
+import br.senac.tads.cake.common.service.jpaimpl.CategoriaServiceJPAImpl;
 import br.senac.tads.cake.common.service.jpaimpl.ProdutoServiceJPAImpl;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -117,7 +119,7 @@ public class ProdutoBean implements Serializable {
 
   public String salvar() {
     Produto p = new Produto();
-    CategoriaService cServ = new CategoriaServiceFakeImpl();
+    CategoriaService cServ = new CategoriaServiceJPAImpl();
 
     p.setNome(nome);
     p.setDescricao(descricao);
@@ -127,6 +129,11 @@ public class ProdutoBean implements Serializable {
     }
     p.setCategorias(listaCategorias);
     p.setPreco(preco);
+    p.setDtCadastro(new Date());
+    
+    ProdutoService produtoService = new ProdutoServiceJPAImpl();
+    produtoService.incluir(p);
+    
     pTemp = p;
     
     Flash flash = FacesContext.getCurrentInstance()

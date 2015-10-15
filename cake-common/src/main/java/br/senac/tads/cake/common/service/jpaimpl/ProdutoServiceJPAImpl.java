@@ -11,6 +11,7 @@ import br.senac.tads.cake.common.service.ProdutoService;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -51,17 +52,48 @@ public class ProdutoServiceJPAImpl implements ProdutoService {
 
     @Override
     public void incluir(Produto p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emFactory.createEntityManager();
+        EntityTransaction transacao = em.getTransaction();
+        try {
+            transacao.begin();
+            em.persist(p);
+            transacao.commit();
+        } catch (Exception e) {
+            transacao.rollback();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public void alterar(Produto p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emFactory.createEntityManager();
+        EntityTransaction transacao = em.getTransaction();
+        try {
+            transacao.begin();
+            em.merge(p);
+            transacao.commit();
+        } catch (Exception e) {
+            transacao.rollback();
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public void remover(Long idProduto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManager em = emFactory.createEntityManager();
+        EntityTransaction transacao = em.getTransaction();
+        try {
+            transacao.begin();
+            Produto p = em.find(Produto.class, idProduto);
+            em.remove(p);
+            transacao.commit();
+        } catch (Exception e) {
+            transacao.rollback();
+        } finally {
+            em.close();
+        }
     }
 
 }
