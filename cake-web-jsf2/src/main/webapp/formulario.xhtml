@@ -14,7 +14,7 @@
       </header>
       <div>
         <h2>Cadastro de produto</h2>
-        <h:form prependId="false"> 
+        <h:form prependId="false" enctype="multipart/form-data"> 
           <p>
             <h:outputLabel value="Nome" />
             <h:inputText id="txtNome" value="#{produtoBean.nome}"
@@ -45,6 +45,10 @@
               <f:convertNumber minFractionDigits="2" />
             </h:inputText>
           </p>
+            <p>
+                <h:outputLabel value="Imagem" />
+                <h:inputFile value=""#{produtoBean.imagem} />
+            </p>
           <p>
 
             <h:commandButton value="Salvar"
