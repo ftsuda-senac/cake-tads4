@@ -7,37 +7,26 @@ package br.senac.tads.cake.common.entity;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import java.util.Objects;
 
 /**
  *
  * @author fernando.tsuda
  */
-@Entity
-@Table(name = "TB_CATEGORIA")
+
 public class Categoria implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-  
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "ID_CATEGORIA", nullable = false)
+
+  private static final long serialVersionUID = 1L;
+
+
   private Long id;
-  
-  @Column(name = "NM_CATEGORIA", nullable = false)
+
   private String nome;
-  
-  @ManyToMany(mappedBy = "categorias")
+
   private List<Produto> produtos;
-  
+
   public Categoria() {
-    
+
   }
 
   public Categoria(Long id, String nome) {
@@ -68,5 +57,31 @@ public class Categoria implements Serializable {
   public void setProdutos(List<Produto> produtos) {
     this.produtos = produtos;
   }
-    
+
+  @Override
+  public int hashCode() {
+    int hash = 7;
+    hash = 97 * hash + Objects.hashCode(this.id);
+    hash = 97 * hash + Objects.hashCode(this.nome);
+    return hash;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final Categoria other = (Categoria) obj;
+    if (!Objects.equals(this.id, other.id)) {
+      return false;
+    }
+    if (!Objects.equals(this.nome, other.nome)) {
+      return false;
+    }
+    return true;
+  }
+
 }

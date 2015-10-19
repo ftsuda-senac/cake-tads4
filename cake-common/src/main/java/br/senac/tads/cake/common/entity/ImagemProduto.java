@@ -6,79 +6,63 @@
 package br.senac.tads.cake.common.entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  *
  * @author Fernando
  */
-@Entity
-@Table(name = "TB_IMAGEM")
+
 public class ImagemProduto implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_IMAGEM")
-    private Long id;
+  private static final long serialVersionUID = 1L;
 
-    @Column(name = "DS_IMAGEM")
-    private String legenda;
+  private Long id;
 
-    @Column(name = "NM_IMAGEM", nullable = false)
-    private String nomeArquivo;
+  private String legenda;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_PRODUTO")
-    private Produto produto;
+  private String nomeArquivo;
 
-    public ImagemProduto() {
-    }
+  private Produto produto;
 
-    public ImagemProduto(Long id, String legenda, String nomeArquivo) {
-        this.id = id;
-        this.legenda = legenda;
-        this.nomeArquivo = nomeArquivo;
-    }
+  public ImagemProduto() {
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public ImagemProduto(Long id, String legenda, String nomeArquivo) {
+    this.id = id;
+    this.legenda = legenda;
+    this.nomeArquivo = nomeArquivo;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getLegenda() {
-        return legenda;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setLegenda(String legenda) {
-        this.legenda = legenda;
-    }
+  public String getLegenda() {
+    return legenda;
+  }
 
-    public String getNomeArquivo() {
-        return nomeArquivo;
-    }
+  public void setLegenda(String legenda) {
+    this.legenda = legenda;
+  }
 
-    public void setNomeArquivo(String nomeArquivo) {
-        this.nomeArquivo = nomeArquivo;
-    }
+  public String getNomeArquivo() {
+    return nomeArquivo;
+  }
 
-    public Produto getProduto() {
-        return produto;
-    }
+  public void setNomeArquivo(String nomeArquivo) {
+    this.nomeArquivo = nomeArquivo;
+  }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
+  public Produto getProduto() {
+    return produto;
+  }
+
+  public void setProduto(Produto produto) {
+    this.produto = produto;
+  }
 
 }
