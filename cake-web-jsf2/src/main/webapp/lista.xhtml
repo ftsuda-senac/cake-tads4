@@ -41,7 +41,7 @@
                     <ui:repeat value="#{produtoBean.lista}" var="prod">
                         <section class="produto">
                             <div class="imagem">
-                                <h:graphicImage name="img/bolo.jpg" alt="Imagem do bolo" />
+                              <h:graphicImage url="#{prod.imagens[0].urlArquivo}" alt="Imagem do bolo" />
                             </div>
                             <div class="info">
                                 <h2><h:outputText value="#{prod.nome}" /></h2>

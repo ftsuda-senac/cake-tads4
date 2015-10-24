@@ -10,8 +10,6 @@ import br.senac.tads.cake.common.entity.ImagemProduto;
 import br.senac.tads.cake.common.entity.Produto;
 import br.senac.tads.cake.common.service.CategoriaService;
 import br.senac.tads.cake.common.service.ProdutoService;
-import br.senac.tads.cake.common.service.fakeimpl.CategoriaServiceFakeImpl;
-import br.senac.tads.cake.common.service.fakeimpl.ProdutoServiceFakeImpl;
 import br.senac.tads.cake.common.service.jpaimpl.CategoriaServiceJPAImpl;
 import br.senac.tads.cake.common.service.jpaimpl.ProdutoServiceJPAImpl;
 import java.io.File;
@@ -141,6 +139,9 @@ public class ProdutoBean implements Serializable {
     
     p.setNome(nome);
     p.setDescricao(descricao);
+    
+    // Laço para fazer a associação bidirecional entre o Produto e Categoria
+    // Sem essa associação, JPA não persiste o relacionamento entre eles
     List<Categoria> listaCategorias = new ArrayList<Categoria>();
     for (Long idCat : idsCategorias) {
       Categoria cat = cServ.obter(idCat);
@@ -151,35 +152,42 @@ public class ProdutoBean implements Serializable {
     p.setPreco(preco);
     p.setDtCadastro(new Date());
     
-    ImagemProduto imagem = new ImagemProduto();
+    ImagemProduto imagemProd = new ImagemProduto();
     String nomeArquivo = obterNomeArquivo();
     if (nomeArquivo != null && nomeArquivo.trim().length() > 0) {
       salvarImagem(nomeArquivo);
-      imagem.setNomeArquivo(nomeArquivo);
-      imagem.setProduto(p);
-      p.setImagens(Arrays.asList(imagem));
+      imagemProd.setNomeArquivo(nomeArquivo);
+      imagemProd.setProduto(p); // Associação bidirecional
+      p.setImagens(Arrays.asList(imagemProd));
     }
     
     ProdutoService produtoService = new ProdutoServiceJPAImpl();
     produtoService.incluir(p);
     
-    pTemp = p;
-    
     Flash flash = FacesContext.getCurrentInstance()
             .getExternalContext().getFlash();
     flash.put("msg", "Produto cadastrado com sucesso");
-    flash.put("prod", pTemp);
+    flash.put("prod", p);
     
     return "lista.xhtml?faces-redirect=true";
   }
   
+  /**
+   * Método que verifica os cabeçalhos do arquivo carregado para extrair
+   * o seu nome. Neste exemplo, o nome do arquivo original será mantido,
+   * porém é recomendável alterá-lo, para evitar sobrescrita de arquivos.
+   * @return 
+   */
   private String obterNomeArquivo() {
     if (imagem != null) {
       String partHeader = imagem.getHeader("content-disposition");
       for (String content : partHeader.split(";")) {
         if (content.trim().startsWith("filename")) {
+          // Remove as aspas do valor do cabeçalho
           String nomeArquivo = content.substring(content.indexOf('=') + 1)
                   .trim().replace("\"", "");
+          
+          // Procura pela \ e extrai somente o nome do arquivo, sem subdiretórios.
           int lastFilePartIndex = nomeArquivo.lastIndexOf("\\");
           if (lastFilePartIndex > 0) {
             return nomeArquivo.substring(lastFilePartIndex, nomeArquivo.length());
@@ -191,6 +199,13 @@ public class ProdutoBean implements Serializable {
     return null;
   }
   
+  /**
+   * Para este exemplo, criar o diretório C:\desenv\imagens e configurar
+   * no Glassfish um Virtual Server apontanto para este diretório.
+   * Se configurado corretamente, as imagens serão obtidas a partir da URL
+   * http://localhost:8080/imagens/[nome-da-imagem]
+   * @param nomeImagem 
+   */
   private void salvarImagem(String nomeImagem) {
     String diretorioDestino = "C:" + File.separator + "desenv"
             + File.separator + "imagens" + File.separator;
@@ -225,6 +240,29 @@ public class ProdutoBean implements Serializable {
           //TODO: LOGAR ERRO
         }
       }
+    }
+  }
+  
+  /**
+   * Faz a mesma coisa que método salvarImagem(), porém usa o recurso
+   * try-with-resources do Java 7, que permite diminuir a quantidade
+   * de código escrito por garantir o fechamento dos recursos (evita todo o 
+   * bloco finally escrito no método anterior).
+   * @param nomeImagem 
+   */
+  private void salvarImagemJava7(String nomeImagem) {
+    String diretorioDestino = "C:" + File.separator + "desenv"
+            + File.separator + "imagens" + File.separator;
+    File arquivo = new File(diretorioDestino + nomeImagem);
+    try (InputStream inputStream = imagem.getInputStream();
+            OutputStream outputStream = new FileOutputStream(arquivo)) {
+      int read = 0;
+      final byte[] bytes = new byte[1024];
+      while ((read = inputStream.read(bytes)) != -1) {
+        outputStream.write(bytes, 0, read);
+      }
+    } catch (IOException e) {
+      //TODO: LOGAR ERRO
     }
   }
   

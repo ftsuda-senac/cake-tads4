@@ -10,19 +10,23 @@ import java.util.Date;
 
 /**
  *
- * @author fernando.tsuda
+ * @author Fernando
  */
-public class Usuario implements Serializable {
+public class UsuarioSistema implements Serializable {
+  
+  private static final long serialVersionUID = 1L;
 
   private Long id;
 
   private String nome;
 
-  private Date dataNascimento;
-
   private Date dataCadastro;
 
   private CredencialAcesso credencial;
+  
+  public UsuarioSistema() {
+    
+  }
 
   public Long getId() {
     return id;
@@ -40,14 +44,6 @@ public class Usuario implements Serializable {
     this.nome = nome;
   }
 
-  public Date getDataNascimento() {
-    return dataNascimento;
-  }
-
-  public void setDataNascimento(Date dataNascimento) {
-    this.dataNascimento = dataNascimento;
-  }
-
   public Date getDataCadastro() {
     return dataCadastro;
   }
@@ -63,5 +59,4 @@ public class Usuario implements Serializable {
   public void setCredencial(CredencialAcesso credencial) {
     this.credencial = credencial;
   }
-
 }

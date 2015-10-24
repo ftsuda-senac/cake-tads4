@@ -8,12 +8,14 @@ package br.senac.tads.cake.common.entity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
@@ -36,8 +38,8 @@ public class ImagemProduto implements Serializable {
     @Column(name = "NM_IMAGEM", nullable = false)
     private String nomeArquivo;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_PRODUTO")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_PRODUTO", nullable = false)
     private Produto produto;
 
     public ImagemProduto() {
@@ -79,6 +81,10 @@ public class ImagemProduto implements Serializable {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+    
+    public String getUrlArquivo() {
+      return "http://localhost:8080/imagens/" + nomeArquivo;
     }
 
 }

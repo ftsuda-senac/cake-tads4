@@ -32,128 +32,138 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "TB_PRODUTO")
 @NamedQueries({
-    @NamedQuery(name = "Produto.listar",
-            query = "SELECT p FROM Produto p"),
-    @NamedQuery(name = "Produto.listarPorCategoria",
-            query = "SELECT p FROM Produto p INNER JOIN "
-                    + "p.categorias c WHERE c.id = :iCategoria"),
-    @NamedQuery(name = "Produto.obter",
-            query = "SELECT p FROM Produto p "
-                    + "WHERE p.id = :idProduto")
+  @NamedQuery(name = "Produto.listar",
+          query = "SELECT DISTINCT p FROM Produto p "
+          + "LEFT JOIN FETCH p.categorias "
+          + "LEFT JOIN FETCH p.imagens"),
+  @NamedQuery(name = "Produto.listarPorCategoria",
+          query = "SELECT DISTINCT p FROM Produto p "
+          + "LEFT JOIN FETCH p.categorias "
+          + "LEFT JOIN FETCH p.imagens "
+          + "INNER JOIN p.categorias c "
+          + "WHERE c.id = :iCategoria"),
+  @NamedQuery(name = "Produto.obter",
+          query = "SELECT DISTINCT p FROM Produto p "
+          + "LEFT JOIN FETCH p.categorias "
+          + "LEFT JOIN FETCH p.imagens "
+          + "WHERE p.id = :idProduto")
 })
 public class Produto implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_PRODUTO")
-    private Long id;
+  private static final long serialVersionUID = 1L;
 
-    @Column(name = "NM_PRODUTO", nullable = false)
-    private String nome;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "ID_PRODUTO")
+  private Long id;
 
-    @Column(name = "DS_PRODUTO")
-    private String descricao;
+  @Column(name = "NM_PRODUTO", nullable = false)
+  private String nome;
 
-    @Column(name = "VL_PRODUTO", precision = 12,
-            scale = 2, nullable = false)
-    private BigDecimal preco;
-    
-    @Column(name = "DT_CADASTRO", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dtCadastro;
+  @Column(name = "DS_PRODUTO")
+  private String descricao;
 
-    @OneToMany(mappedBy = "produto")
-    private List<ImagemProduto> imagens;
+  @Column(name = "VL_PRODUTO", precision = 12,
+          scale = 2, nullable = false)
+  private BigDecimal preco;
 
-    @ManyToMany
-    @JoinTable(name = "TB_PRODUTO_CATEGORIA",
-            joinColumns = {
-                @JoinColumn(name = "ID_PRODUTO")
-            },
-            inverseJoinColumns = {
-                @JoinColumn(name = "ID_CATEGORIA")
-            })
-    private List<Categoria> categorias;
+  @Column(name = "DT_CADASTRO", nullable = false)
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date dtCadastro;
 
-    @Transient
-    private List<ItemCompra> itensCompra;
+  @OneToMany(mappedBy = "produto")
+  private List<ImagemProduto> imagens;
 
-    public Produto() {
-    }
+  @ManyToMany
+  @JoinTable(name = "TB_PRODUTO_CATEGORIA",
+          joinColumns = {
+            @JoinColumn(name = "ID_PRODUTO")
+          },
+          inverseJoinColumns = {
+            @JoinColumn(name = "ID_CATEGORIA")
+          })
+  private List<Categoria> categorias;
 
-    public Produto(Long id, String nome, String descricao, List<ImagemProduto> imagens, List<Categoria> categorias, BigDecimal preco) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.imagens = imagens;
-        this.categorias = categorias;
-        this.preco = preco;
-    }
+  @Transient
+  private List<ItemCompra> itensCompra;
 
-    public Long getId() {
-        return id;
-    }
+  public Produto() {
+    this.dtCadastro = new Date();
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Produto(Long id, String nome, String descricao,
+          List<ImagemProduto> imagens, List<Categoria> categorias, BigDecimal preco, Date dtCadastro) {
+    this.id = id;
+    this.nome = nome;
+    this.descricao = descricao;
+    this.imagens = imagens;
+    this.categorias = categorias;
+    this.preco = preco;
+    this.dtCadastro = dtCadastro;
+  }
 
-    public String getNome() {
-        return nome;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getDescricao() {
-        return descricao;
-    }
+  public String getNome() {
+    return nome;
+  }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+  public void setNome(String nome) {
+    this.nome = nome;
+  }
 
-    public List<ImagemProduto> getImagens() {
-        return imagens;
-    }
+  public String getDescricao() {
+    return descricao;
+  }
 
-    public void setImagens(List<ImagemProduto> imagens) {
-        this.imagens = imagens;
-    }
+  public void setDescricao(String descricao) {
+    this.descricao = descricao;
+  }
 
-    public BigDecimal getPreco() {
-        return preco;
-    }
+  public List<ImagemProduto> getImagens() {
+    return imagens;
+  }
 
-    public void setPreco(BigDecimal preco) {
-        this.preco = preco;
-    }
+  public void setImagens(List<ImagemProduto> imagens) {
+    this.imagens = imagens;
+  }
 
-    public Date getDtCadastro() {
-        return dtCadastro;
-    }
+  public BigDecimal getPreco() {
+    return preco;
+  }
 
-    public void setDtCadastro(Date dtCadastro) {
-        this.dtCadastro = dtCadastro;
-    }
+  public void setPreco(BigDecimal preco) {
+    this.preco = preco;
+  }
 
-    public List<Categoria> getCategorias() {
-        return categorias;
-    }
+  public Date getDtCadastro() {
+    return dtCadastro;
+  }
 
-    public void setCategorias(List<Categoria> categorias) {
-        this.categorias = categorias;
-    }
+  public void setDtCadastro(Date dtCadastro) {
+    this.dtCadastro = dtCadastro;
+  }
 
-    public List<ItemCompra> getItensCompra() {
-        return itensCompra;
-    }
+  public List<Categoria> getCategorias() {
+    return categorias;
+  }
 
-    public void setItensCompra(List<ItemCompra> itensCompra) {
-        this.itensCompra = itensCompra;
-    }
+  public void setCategorias(List<Categoria> categorias) {
+    this.categorias = categorias;
+  }
+
+  public List<ItemCompra> getItensCompra() {
+    return itensCompra;
+  }
+
+  public void setItensCompra(List<ItemCompra> itensCompra) {
+    this.itensCompra = itensCompra;
+  }
 
 }

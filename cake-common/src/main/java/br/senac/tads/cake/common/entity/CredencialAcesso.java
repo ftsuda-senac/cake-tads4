@@ -10,21 +10,17 @@ package br.senac.tads.cake.common.entity;
  * @author Fernando
  */
 public class CredencialAcesso {
-  
-    private Long id;
-    
-    private String email;
-    
-    private String hashSenha;
-    
-    private Usuario usuario;
 
-  public Long getId() {
-    return id;
-  }
+  private static final long serialVersionUID = 1L;
 
-  public void setId(Long id) {
-    this.id = id;
+  private String email;
+
+  private String hashSenha;
+
+  private Cliente usuario;
+
+  public CredencialAcesso() {
+
   }
 
   public String getEmail() {
@@ -43,12 +39,12 @@ public class CredencialAcesso {
     this.hashSenha = hashSenha;
   }
 
-  public Usuario getUsuario() {
+  public Cliente getUsuario() {
     return usuario;
   }
 
-  public void setUsuario(Usuario usuario) {
+  public void setUsuario(Cliente usuario) {
     this.usuario = usuario;
   }
-  
+
 }

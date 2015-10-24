@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,22 +23,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TB_CATEGORIA")
 public class Categoria implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-  
+
+  private static final long serialVersionUID = 1L;
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ID_CATEGORIA", nullable = false)
   private Long id;
-  
-  @Column(name = "NM_CATEGORIA", nullable = false)
+
+  @Column(name = "NM_CATEGORIA", nullable = false, unique = true) // Evitar a duplicação do nome.
   private String nome;
-  
-  @ManyToMany(mappedBy = "categorias")
+
+  @ManyToMany(mappedBy = "categorias", fetch = FetchType.LAZY)
   private List<Produto> produtos;
-  
+
   public Categoria() {
-    
+
   }
 
   public Categoria(Long id, String nome) {
@@ -68,5 +69,5 @@ public class Categoria implements Serializable {
   public void setProdutos(List<Produto> produtos) {
     this.produtos = produtos;
   }
-    
+
 }

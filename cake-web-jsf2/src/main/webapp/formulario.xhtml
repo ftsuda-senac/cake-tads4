@@ -25,9 +25,9 @@
           <p>
             <h:outputLabel value="Descricao" />
             <h:inputTextarea value="#{produtoBean.descricao}">
-                <f:passThroughAttribute name="placeholder" 
-                                        value="Digite a descrição do produto" />
-                
+              <f:passThroughAttribute name="placeholder" 
+                                      value="Digite a descrição do produto" />
+
             </h:inputTextarea>
           </p>
           <p>
@@ -45,12 +45,11 @@
               <f:convertNumber minFractionDigits="2" />
             </h:inputText>
           </p>
-            <p>
-                <h:outputLabel value="Imagem" />
-                <h:inputFile value="#{produtoBean.imagem}" />
-            </p>
           <p>
-
+            <h:outputLabel value="Imagem" />
+            <h:inputFile value="#{produtoBean.imagem}" />
+          </p>
+          <p>
             <h:commandButton value="Salvar"
                              action="#{produtoBean.salvar()}" />
           </p>

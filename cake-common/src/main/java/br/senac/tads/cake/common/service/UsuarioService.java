@@ -6,7 +6,7 @@
 package br.senac.tads.cake.common.service;
 
 import br.senac.tads.cake.common.entity.CredencialAcesso;
-import br.senac.tads.cake.common.entity.Usuario;
+import br.senac.tads.cake.common.entity.UsuarioSistema;
 
 /**
  *
@@ -14,11 +14,11 @@ import br.senac.tads.cake.common.entity.Usuario;
  */
 public interface UsuarioService {
   
-  public Usuario autenticar(CredencialAcesso credencial);
+  public UsuarioSistema autenticar(CredencialAcesso credencial);
   
-  public void criar(Usuario usuario);
+  public void criar(UsuarioSistema usuario);
   
-  public void alterar(Usuario usuario);
+  public void alterar(UsuarioSistema usuario);
   
   public void excluir(Long id);
   

@@ -19,7 +19,7 @@ public class Compra implements Serializable {
   
   private Date dataCompra;
   
-  private Usuario usuario;
+  private Cliente usuario;
   
   private List<ItemCompra> itensCompra;
 
@@ -39,11 +39,11 @@ public class Compra implements Serializable {
     this.dataCompra = dataCompra;
   }
 
-  public Usuario getUsuario() {
+  public Cliente getUsuario() {
     return usuario;
   }
 
-  public void setUsuario(Usuario usuario) {
+  public void setUsuario(Cliente usuario) {
     this.usuario = usuario;
   }
 
