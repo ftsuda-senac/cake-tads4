@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+  <h:head>
+    <title>CakeWeb - DSW</title>
+  </h:head>
+  <h:body>
+    <h1>CakeWeb</h1>
+    <h2>Tela de login</h2>
+    <h:form prependId="false" id="loginForm">
+      <p><h:messages /></p>
+      <p><h:outputLabel value="Usuário"/>: <h:inputText value="#{usuarioBean.nome}" id="nome"/></p>
+      <p><h:outputLabel value="Senha"/>: <h:inputSecret value="#{usuarioBean.senha}" id="senha"/></p>
+      <p><h:commandButton id="button" value="Entrar" action="#{usuarioBean.doLogin}"/></p>
+    </h:form>
+  </h:body>
+</html>
+

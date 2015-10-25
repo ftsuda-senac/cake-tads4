@@ -29,9 +29,7 @@
     </resource-bundle>
   </application>
   -->
-  <!--
   <lifecycle>
-    <phase-listener>br.senac.tads.dsw.veiculoweb.phaselistener.AutorizacaoListener</phase-listener>
+    <phase-listener>br.senac.tads.dsw.cake.jsf2.listener.AutorizacaoListener</phase-listener>
   </lifecycle>
-  -->
 </faces-config>

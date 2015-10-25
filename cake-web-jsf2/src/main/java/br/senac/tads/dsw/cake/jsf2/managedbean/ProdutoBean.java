@@ -169,7 +169,7 @@ public class ProdutoBean implements Serializable {
     flash.put("msg", "Produto cadastrado com sucesso");
     flash.put("prod", p);
     
-    return "lista.xhtml?faces-redirect=true";
+    return "/lista.xhtml?faces-redirect=true";
   }
   
   /**
