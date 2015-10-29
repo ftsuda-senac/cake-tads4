@@ -8,12 +8,13 @@
   </h:head>
   <h:body>
     <h1><h:outputText value="#{msgs['app.title']}" /></h1>
-    <p><h:outputText value="" /></p>
+    <h1><h:outputText value="#{msgs['app.salutation']}" /></h1>
+    <p><h:outputText value="#{msgs['app.message']}" /></p>
     <h:form prependId="false">
-      <h:outputLabel for="txtNome" value="`Nome" />
+      <h:outputLabel for="txtNome" value="#{msgs['name.label']}" />
             <h:inputText id="txtNome"
-                         required="true" requiredMessage="Preencher o nome" 
-                         pt:placeholder="Digite o nome do produto"/>
+                         required="true" requiredMessage="#{msgs['name.error.required']}" 
+                         pt:placeholder="#{msgs['name.placeholder']}"/>
             <h:commandButton value="" />
   </h:form>
 </h:body>
