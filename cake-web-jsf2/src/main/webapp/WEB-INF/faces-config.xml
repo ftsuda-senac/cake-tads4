@@ -15,20 +15,19 @@
     </navigation-case>
   </navigation-rule>
   -->
-  <!--
   <application>
     <locale-config>
       <default-locale>en-US</default-locale>
       <supported-locale>pt-BR</supported-locale>
     </locale-config>
     <resource-bundle>
-      < !- Nome do arquivo - >
-      <base-name>br.com.exemplo.mensagens.messages</base-name>
-      < !- Nome da variável usada nas telas - >
+      <!-- Nome do arquivo -->
+      <base-name>br.senac.tads.dsw.cake.jsf2.mensagens</base-name>
+      <!-- Nome da variável usada nas telas -->
       <var>msgs</var>
     </resource-bundle>
   </application>
-  -->
+  
   <lifecycle>
     <phase-listener>br.senac.tads.dsw.cake.jsf2.listener.AutorizacaoListener</phase-listener>
   </lifecycle>

@@ -15,6 +15,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -22,6 +26,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "TB_CATEGORIA")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Categoria implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -35,6 +41,7 @@ public class Categoria implements Serializable {
   private String nome;
 
   @ManyToMany(mappedBy = "categorias", fetch = FetchType.LAZY)
+  @XmlTransient
   private List<Produto> produtos;
 
   public Categoria() {
@@ -68,6 +75,11 @@ public class Categoria implements Serializable {
 
   public void setProdutos(List<Produto> produtos) {
     this.produtos = produtos;
+  }
+
+  @Override
+  public String toString() {
+    return "Categoria{" + "id=" + id + ", nome=" + nome + '}';
   }
 
 }

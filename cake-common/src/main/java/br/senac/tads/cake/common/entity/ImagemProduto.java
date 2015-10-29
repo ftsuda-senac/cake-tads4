@@ -16,6 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -23,6 +27,8 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "TB_IMAGEM")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ImagemProduto implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -40,6 +46,7 @@ public class ImagemProduto implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_PRODUTO", nullable = false)
+    @XmlTransient
     private Produto produto;
 
     public ImagemProduto() {
@@ -86,5 +93,10 @@ public class ImagemProduto implements Serializable {
     public String getUrlArquivo() {
       return "http://localhost:8080/imagens/" + nomeArquivo;
     }
+
+  @Override
+  public String toString() {
+    return "ImagemProduto{" + "id=" + id + ", legenda=" + legenda + ", nomeArquivo=" + nomeArquivo + '}';
+  }
 
 }

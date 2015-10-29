@@ -24,6 +24,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -48,6 +51,8 @@ import javax.persistence.Transient;
           + "LEFT JOIN FETCH p.imagens "
           + "WHERE p.id = :idProduto")
 })
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Produto implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -164,6 +169,11 @@ public class Produto implements Serializable {
 
   public void setItensCompra(List<ItemCompra> itensCompra) {
     this.itensCompra = itensCompra;
+  }
+
+  @Override
+  public String toString() {
+    return "Produto{" + "id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", preco=" + preco + ", dtCadastro=" + dtCadastro + ", imagens=" + imagens + ", categorias=" + categorias + ", itensCompra=" + itensCompra + '}';
   }
 
 }
