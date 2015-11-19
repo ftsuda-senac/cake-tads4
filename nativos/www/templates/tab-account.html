@@ -15,20 +15,21 @@
         <input type="tel" placeholder="Telefone" ng-model="contato.tel">
       </label>
       <ion-toggle ng-model="settings.enableFriends">
-          Enable Friends
+        Enable Friends
       </ion-toggle>
       <button class="button button-stable" ng-click="salvar(contato)">Salvar</button>
     </ion-list>
-    <p>{{contato | json}}</p>
+    <p>{{contato| json}}</p>
   </ion-content>
 </ion-view>
 <script id="modal.html" type="text/ng-template">
   <ion-modal-view>
     <ion-header-bar>
-      <h1 class="title">{{title}}</h1>
+    <h1 class="title">{{title}}</h1>
     </ion-header-bar>
     <ion-content>
-      {{mensagem}}
+      <h3>{{mensagem}}<h3>
+      <button class="button button-block button-stable" ng-click="closeModal()">Fechar</button>
     </ion-content>
   </ion-modal-view>
 </script>

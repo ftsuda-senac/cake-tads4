@@ -1,13 +1,15 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <div class="list card">
+    <div class="list card" ng-show="device">
       <div class="item item-divider">Informações do dispositivo</div>
-      <div class="item item-body" ng-show="{{device !== undefined}}">
-        <p><label>cordova</label> {{cordova}}</p>
-        <p><label>model</label> {{model}}</p>
-        <p><label>platform</label> {{platform}}</p>
-        <p><label>uuid</label> {{uuid}}</p>
-        <p><label>version</label> {{version}}</p>
+      <div class="item item-body">
+        <div>
+          <p><label>cordova</label> {{cordova}}</p>
+          <p><label>model</label> {{model}}</p>
+          <p><label>platform</label> {{platform}}</p>
+          <p><label>uuid</label> {{uuid}}</p>
+          <p><label>version</label> {{version}}</p>
+        </div>
       </div>
     </div>
     <div class="list card">

@@ -70,11 +70,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           };
           $scope.salvar = function (contato) {
             // IMPLEMENTAR AQUI A LOGICA PARA SALVAR LOCALMENTE, CHAMAR WS, ETC.
-            
-            
-            $scope.openModal();
             $scope.title = "Sucesso";
             $scope.mensagem = "Contato " + contato.nome + " salvo com sucesso";
+            $scope.openModal();
           };
         })
 
