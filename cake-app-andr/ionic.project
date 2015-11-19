@@ -1,0 +1,10 @@
+{
+	"name": "cake-app-andr",
+	"app_id": "",
+	"proxies": [
+	{
+		"path": "/cake-rest",
+		"proxyUrl": "http://localhost:8080/cake-rest"
+	}
+  ]
+}

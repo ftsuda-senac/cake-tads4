@@ -1,0 +1,48 @@
+<ion-view view-title="{{produto.nome}}">
+  <ion-content id="produto">
+    <!--
+    <div class="imagem">
+      <img ng-src="img/bolo.jpg" /> < !-- ACHAR E USAR IMAGENS MAIS ADEQUADAS -- >
+    </div>
+    -->
+    <div style="height: 305px">
+      <carousel interval="8000" no-wrap="false">
+        <slide active="slide.active">
+          <img ng-src="img/bolo.jpg" style="margin:auto;">
+        </slide>
+        <slide>
+          <img ng-src="img/bolo2.jpg" style="margin:auto;">
+        </slide>
+        <slide>
+          <img ng-src="img/bolo3.jpg" style="margin:auto;">
+        </slide>
+      </carousel>
+    </div>
+
+    <h2>{{produto.nome}}</h2>
+    <h3>Descri&ccedil;&atilde;o</h3>
+    <p>{{produto.descricao}}</p>
+    <h3>Categorias</h3>
+    <p>
+      <span ng-repeat="cat in produto.categorias"><a href="#" class="label label-info">{{cat.nome}}</a>&nbsp;</span>
+    </p>
+    <div class="row">
+      <div class="col col-50">
+        <div class="card">
+          <div class="item item-text-wrap center-block">
+            <h3>Preço</h3>
+            <strong>{{produto.preco| currency:"R$":2}}</strong>
+          </div>
+        </div>
+      </div>
+      <div class="col col-50">
+        <form action="#" method="post" enctype="application/x-www-form-urlencoded">
+          <input type="hidden" name="id" ng-model="produto.id" />
+          <button class="button button-block button-balanced" ng-click="adicionar(produto)"><i class="icon ion-checkmark-circled"></i> Adicionar ao carrinho</button>
+        </form>
+      </div>
+    </div>
+
+
+  </ion-content>
+</ion-view>

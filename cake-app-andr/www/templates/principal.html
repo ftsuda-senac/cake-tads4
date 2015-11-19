@@ -1,0 +1,79 @@
+<!--
+<div class="bar bar-header bar-light">
+  <h1 class="title">TADS Cake</h1>
+</div>
+-->
+<ion-side-menus enable-menu-with-back-views="false"> <!-- Se colocar titulo, adicionar style="top:44px" -->
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-bag" menu-toggle="right">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left" expose-aside-when="large">
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">Categorias</h1>
+    </ion-header-bar> 
+    <ion-content><!-- PARA FAZER BUSCAS, COLOCAR href="#/app/lista/:CAT -->
+      <!--
+      <ion-list>
+        <ion-item menu-close> 
+          Categoria 1
+        </ion-item>
+        <ion-item menu-close>
+          Categoria 2
+        </ion-item>
+        <ion-item menu-close>
+          Categoria 3
+        </ion-item>
+      </ion-list>
+      -->
+      <ion-list ng-repeat="cat in categorias">
+        <ion-item menu-close href="#app/lista/{{cat.nome | lowercase}}">
+          {{cat.nome}}
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+  <ion-side-menu side="right">
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">Carrinho</h1>
+    </ion-header-bar>
+    <ion-content>
+      <div ng-if="!carrinho || carrinho.length == 0">
+        <p>Voce não tem nenhum produto no carrinho
+      </div>
+      <div ng-if="carrinho && carrinho.length > 0">
+        <table>
+          <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Data</th>
+          </tr>
+          <tr ng-repeat="item in carrinho track by $index"">
+            <td>{{item.$index}}</td>
+            <td>{{item.produto.nome}}</td>
+            <td>{{item.data | date}}</td>
+          </tr>
+        </table>
+		<button ng-click="limparCarrinho()">Limpar carrinho</button>
+      </div>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
+<!--
+<div class="bar bar-footer bar-dark">
+  <div class="title">&copy; Senac TADS 2015</div>
+</div>
+-->
