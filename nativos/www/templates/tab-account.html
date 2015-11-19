@@ -1,9 +1,34 @@
 <ion-view view-title="Account">
   <ion-content>
+    <h3>Exemplo de formulário</h3>
     <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
+      <label class="item item-input">
+        <input type="text" placeholder="Nome" ng-model="contato.nome">
+      </label>
+      <label class="item item-input">
+        <input type="date" placeholder="Nascimento" ng-model="contato.dtnasc">
+      </label>
+      <label class="item item-input">
+        <input type="email" placeholder="E-mail" ng-model="contato.email">
+      </label>
+      <label class="item item-input">
+        <input type="tel" placeholder="Telefone" ng-model="contato.tel">
+      </label>
+      <ion-toggle ng-model="settings.enableFriends">
+          Enable Friends
+      </ion-toggle>
+      <button class="button button-stable" ng-click="salvar(contato)">Salvar</button>
     </ion-list>
+    <p>{{contato | json}}</p>
   </ion-content>
 </ion-view>
+<script id="modal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">{{title}}</h1>
+    </ion-header-bar>
+    <ion-content>
+      {{mensagem}}
+    </ion-content>
+  </ion-modal-view>
+</script>

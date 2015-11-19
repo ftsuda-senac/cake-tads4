@@ -1,13 +1,16 @@
-<ion-view view-title="Camera">
+<ion-view view-title="Recursos nativos">
   <ion-content>
-			<button ng-click="tirarFoto()" class="button button-block button-primary">Tirar foto</button>
-			<button ng-click="selecionarFoto()" class="button button-block button-primary">Selecionar foto</button>
-			<button ng-click="vibrar()" class="button button-block button-primary">Vibrar</button>
-			<div>
-				<img ng-show="imageSrc !== undefined" ng-src="{{imageSrc}}" style="text-align: center">
-				<p><label>Latitude:</label> {{latitude}}</p>
-				<p><label>Longitude:</label> {{longitude}}</p>
-			</div>
-			<p>xpto2</p>
+    <button ng-click="tirarFoto()" class="button button-block button-balanced">Tirar foto</button>
+    <button ng-click="selecionarFoto()" class="button button-block button-energized">Selecionar foto</button>
+    <button ng-click="obterLocalizacao()" class="button button-block button-primary">Obter localização</button>
+    <button ng-click="vibrar()" class="button button-block button-assertive">Vibrar</button>
+    <div>
+      <img ng-show="imageSrc !== undefined" ng-src="{{imageSrc}}" style="text-align: center">
+      <p><label>Latitude:</label> {{latitude}}</p>
+      <p><label>Longitude:</label> {{longitude}}</p>
+    </div>
+
+    <p><label>Click to call:</label> <a href="tel:+5111999999999">Ligar</a></p>
+    <p>xpto3</p>
   </ion-content>
 </ion-view>
